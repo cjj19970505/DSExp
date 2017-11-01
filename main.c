@@ -24,7 +24,6 @@ int main(){
 	
 	
 	
-	
 	return 0;
 }
 int max(int a, int b)

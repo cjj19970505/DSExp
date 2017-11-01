@@ -1,7 +1,7 @@
 #ifndef STATIS_H
 #define STATIS_H
 #include "CLinkList.h"
-struct FLL_Node
+struct FLL_Node	//²»ÒªÓÃ£¡£¡ 
 {
 	char c1;
 	char c2;
@@ -19,4 +19,6 @@ void sta_statis(FreLinkList *linkList, CLinkList *fileContent);
 void fll_Print(FreLinkList *linkList);
 void rank(FreLinkList *linkList);
 void fll_Sort(FreLinkList *freLinkList);
+int fll_GetData(FreLinkList *freLinkList, char *ch1, char *ch2, long *freq);
+int fll_MoveNext(FreLinkList *linkList);
 #endif

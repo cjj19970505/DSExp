@@ -20,4 +20,7 @@ int bt_SetRight(BiTree *biTree, BiTree *value);
 BiTree *bt_NewRight(BiTree *biTree, char c1, char c2, long freq);
 BiTree *bt_NewLeft(BiTree *biTree, char c1, char c2, long freq);
 void bt_PreOrder(BiTree *biTree);
+void bt_PreOrderRight(BiTree *biTree);
+void bt_PreOrderLeft(BiTree *biTree);
+int bt_SetParent( BiTree *target,BiTree *dad);
 #endif

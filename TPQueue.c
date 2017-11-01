@@ -1,4 +1,5 @@
 #include "TPQueue.h"
+#include "statis.h"
 #include<stdlib.h>
 #include<stdio.h>
 int tpq_DeleteNode(TPQ_Node *node);
@@ -105,7 +106,7 @@ void tpq_Print(TPQueue *queue)
 }
 TPQueue *tpq_CreateFromFLL(FreLinkList *freLinkList)
 {
-	int endOfList = false;
+	int endOfList = 0;
 	while(!endOfList)
 	{
 		endOfList = fll_MoveNext(freLinkList);
@@ -115,6 +116,7 @@ TPQueue *tpq_CreateFromFLL(FreLinkList *freLinkList)
 		
 	}
 }
+
 BiTree *bt_CreateFromFLLNode(FLL_Node *node)		//对链表里节点转化为二叉树 
 {
 	BiTree *newTree = (BiTree*)malloc(sizeof(BiTree));
