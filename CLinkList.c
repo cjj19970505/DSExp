@@ -84,17 +84,4 @@ void cll_SetHead(CLinkList *linkList)
 {
 	linkList->curr = linkList->head;
 }
-/*
-int main()
-{
-	LinkList ll;
-	ll_Create(&ll);
-	ll_Append(&ll,78,89);
-	ll_MoveNext(&ll);
-	ll_Append(&ll,-3,97);
-	ll_MoveNext(&ll);
-	ll_Print(&ll);
-	return 0;
-}
-*/
 

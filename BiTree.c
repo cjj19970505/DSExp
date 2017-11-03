@@ -29,7 +29,6 @@ BiTree *bt_GetParent(BiTree *biTree)     //返回当前节点的双亲节点
 	}
 	return biTree->parent;
 }
-
 BiTree *bt_GetLeftTree(BiTree *biTree)     //返回当前节点左节点 
 {
 	if (biTree == NULL)			//判断输入二叉树是否为空
@@ -145,50 +144,21 @@ BiTree *bt_NewLeft(BiTree *biTree, char c1, char c2, long freq)
 	return newTree;
 }
 
-//==========================================测试区===================================== 
 
-
-BiTree *bt_CreHuff(FreLinkList *linkList)    //创建哈夫曼树 	   *************************参数调用队列前两个树
+BiTree *bt_CreHuff(FreLinkList *linkList)    //创建哈夫曼树
 {
 	TPQueue *tpqueue = tpq_CreateFromFLL(linkList);
-	/*
-	//用来测试tpqueue的 现在通过了 之后删!! 
-	printf("%d",tpq_GetSize(tpqueue));
-	printf("\n");
-	while(!tpq_IsEmpty(tpqueue))
-	{
-		BiTree *tree = tpq_OutQueue(tpqueue);
-		printf("|");
-		if(tree->c1 < 0)
-		{
-			printf("%c%c",tree->c1,tree->c2);
-		}
-		else
-		{
-			printf("%c",tree->c1);
-		}
-		printf("-%d",tree->freq);
-		printf("|");
-		//printf("\n");
-	}
-	*/
-	///*
 	BiTree *tree1;
 	BiTree *tree2;
 	tree1 = tpq_OutQueue(tpqueue);
 	tree2 = tpq_OutQueue(tpqueue);
 	while (tree2 != NULL)
 	{
-		//bt_PrintPreOrder(tree1);
-		//printf("\n");
 		BiTree *parentT = (BiTree*)malloc(sizeof(BiTree));
 		bt_Create(parentT,128,0,tree1->freq + tree2->freq);
-		//bt_SetParent(tree1,parentT);    //对前两个树合成新树
 		bt_SetLeft(parentT,tree1);
-		//bt_SetParent(tree2,parentT);
 		bt_SetRight(parentT,tree2);
-		//parentT->freq = tree1->freq + tree2->freq;
-		tpq_InQueue(tpqueue, parentT);                 //将新树插入队列 
+		tpq_InQueue(tpqueue, parentT);
 		tree1 = tpq_OutQueue(tpqueue);
 		tree2 = tpq_OutQueue(tpqueue);
 	}

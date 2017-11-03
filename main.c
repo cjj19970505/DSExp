@@ -23,8 +23,6 @@ int main(){
 	fll_SetHead(&fll);
 	TPQueue tpqQueue;
 	bt_CreHuff(&fll);
-	
-	
 	return 0;
 }
 int max(int a, int b)
@@ -69,6 +67,8 @@ void readSourceFile(){
 		ch=fgetc(pFile);
 		count++;
 	}
+	int *code;
+	getHuffCode(fileContent, code);
 	
 	fclose(pFile);
 }
