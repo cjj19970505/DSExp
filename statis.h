@@ -21,4 +21,5 @@ void rank(FreLinkList *linkList);
 void fll_Sort(FreLinkList *freLinkList);
 int fll_GetData(FreLinkList *freLinkList, char *ch1, char *ch2, long *freq);
 int fll_MoveNext(FreLinkList *linkList);
+int fll_SetHead(FreLinkList *freLinkList);
 #endif

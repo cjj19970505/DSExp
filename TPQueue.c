@@ -71,11 +71,21 @@ void tpq_InQueue(TPQueue *queue, BiTree *data)
 		}
 	}
 }
+int tpq_GetSize(TPQueue *queue)
+{
+	TPQ_Node *node = queue->front;
+	int count = 0;
+	while(node != NULL)
+	{
+		count++;
+		node = node->next;
+	}
+}
 BiTree *tpq_OutQueue(TPQueue *queue)
 {
 	if(tpq_IsEmpty(queue))
 	{
-		return 0;
+		return NULL;
 	}
 	TPQ_Node *node = queue->front;
 	queue->front = queue->front->next;
@@ -106,15 +116,18 @@ void tpq_Print(TPQueue *queue)
 }
 TPQueue *tpq_CreateFromFLL(FreLinkList *freLinkList)
 {
-	int endOfList = 0;
-	while(!endOfList)
+	TPQueue *tpqueue = (TPQueue*)malloc(sizeof(TPQueue));
+	tpq_Create(tpqueue);
+	while(fll_MoveNext(freLinkList))
 	{
-		endOfList = fll_MoveNext(freLinkList);
 		char ch1,ch2;
 		long freq;
 		fll_GetData(freLinkList, &ch1, &ch2, &freq);
-		
+		BiTree *newTree = (BiTree*)malloc(sizeof(BiTree));
+		bt_Create(newTree,ch1,ch2,freq);
+		tpq_InQueue(tpqueue, newTree);
 	}
+	return tpqueue;
 }
 
 BiTree *bt_CreateFromFLLNode(FLL_Node *node)		//对链表里节点转化为二叉树 

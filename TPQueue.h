@@ -1,6 +1,7 @@
 #ifndef TPQUEUE_H
 #define TPQUEUE_H
 #include "BiTree.h"
+#include "statis.h"
 struct TPQ_Node
 {
 	BiTree *data;
@@ -20,5 +21,8 @@ void tpq_InQueue(TPQueue *queue, BiTree *data);
 BiTree *tpq_OutQueue(TPQueue *queue);
 int tpq_DeleteNode(TPQ_Node *node);
 void tpq_Print(TPQueue *queue);
+TPQueue *tpq_CreateFromFLL(FreLinkList *freLinkList);
+int tpq_GetSize(TPQueue *queue);
+
 
 #endif

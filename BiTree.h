@@ -1,5 +1,6 @@
 #ifndef BITREE_H
 #define BITREE_H
+#include "statis.h"
 
 struct BiTree
 {
@@ -23,4 +24,5 @@ void bt_PreOrder(BiTree *biTree);
 void bt_PreOrderRight(BiTree *biTree);
 void bt_PreOrderLeft(BiTree *biTree);
 int bt_SetParent( BiTree *target,BiTree *dad);
+BiTree *bt_CreHuff(FreLinkList *linkList);
 #endif

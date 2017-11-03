@@ -62,7 +62,7 @@ void bt_PreOrderLeft(BiTree *biTree)
 	bt_PreOrderLeft(biTree->leftTree);
 	bt_PreOrderRight(biTree->rightTree); 
 }
-
+void bt_PreOrderRight(BiTree *biTree);
 void bt_PreOrderRight(BiTree *biTree)
 {
 	if (biTree == NULL)		
@@ -73,7 +73,26 @@ void bt_PreOrderRight(BiTree *biTree)
 	bt_PreOrderLeft(biTree->leftTree);
 	bt_PreOrderRight(biTree->rightTree); 
 }
-
+void bt_PrintPreOrder(BiTree *biTree)
+{
+	if(biTree == NULL)
+	{
+		return;
+	}
+	printf("(");
+	if(biTree->c1 < 0)
+	{
+		printf("char:%c%c,fre:%d",biTree->c1,biTree->c2,biTree->freq);
+	}
+	else
+	{
+		printf("char:%c,fre:%d",biTree->c1,biTree->freq);
+	}
+	printf(") ");
+	bt_PrintPreOrder(biTree->leftTree);
+	bt_PrintPreOrder(biTree->rightTree); 
+	
+}
 
 
 void bt_PreOrder(BiTree *biTree)    //先序遍历 
@@ -107,17 +126,6 @@ int bt_SetRight(BiTree *biTree, BiTree *value)    //设置右节点
 	return 1;
 }
 
-int bt_SetParent( BiTree *target,BiTree *dad)   //设置双亲节点 
-{
-	if(target == NULL)
-	{
-		return 0;
-	}
-	target->parent = dad;
-	return 1;
-}
-//===============================测试区======================================= 
-
 BiTree *bt_NewRight(BiTree *biTree, char c1, char c2, long freq)
 {
 	BiTree *newTree = (BiTree*)malloc(sizeof(BiTree));
@@ -140,23 +148,55 @@ BiTree *bt_NewLeft(BiTree *biTree, char c1, char c2, long freq)
 //==========================================测试区===================================== 
 
 
-void bt_CreHuff(FreLinkList *linkList)    //创建哈夫曼树 	   *************************参数调用队列前两个树
+BiTree *bt_CreHuff(FreLinkList *linkList)    //创建哈夫曼树 	   *************************参数调用队列前两个树
 {
 	TPQueue *tpqueue = tpq_CreateFromFLL(linkList);
+	/*
+	//用来测试tpqueue的 现在通过了 之后删!! 
+	printf("%d",tpq_GetSize(tpqueue));
+	printf("\n");
+	while(!tpq_IsEmpty(tpqueue))
+	{
+		BiTree *tree = tpq_OutQueue(tpqueue);
+		printf("|");
+		if(tree->c1 < 0)
+		{
+			printf("%c%c",tree->c1,tree->c2);
+		}
+		else
+		{
+			printf("%c",tree->c1);
+		}
+		printf("-%d",tree->freq);
+		printf("|");
+		//printf("\n");
+	}
+	*/
+	///*
 	BiTree *tree1;
 	BiTree *tree2;
-	tree1 = tpq_OutQueue(&tpqueue);
-	tree2 = tpq_OutQueue(&tpqueue);
+	tree1 = tpq_OutQueue(tpqueue);
+	tree2 = tpq_OutQueue(tpqueue);
 	while (tree2 != NULL)
 	{
+		//bt_PrintPreOrder(tree1);
+		//printf("\n");
 		BiTree *parentT = (BiTree*)malloc(sizeof(BiTree));
-		bt_SetParent(tree1,parentT);    //对前两个树合成新树
-		bt_SetParent(tree2,parentT);
-		parentT->freq = tree1->freq + tree2->freq;
-		tpq_InQueue(&tpqueue, parentT);                 //将新树插入队列 
-		tree1 = tpq_OutQueue(&tpqueue);
-		tree2 = tpq_OutQueue(&tpqueue);
+		bt_Create(parentT,128,0,tree1->freq + tree2->freq);
+		//bt_SetParent(tree1,parentT);    //对前两个树合成新树
+		bt_SetLeft(parentT,tree1);
+		//bt_SetParent(tree2,parentT);
+		bt_SetRight(parentT,tree2);
+		//parentT->freq = tree1->freq + tree2->freq;
+		tpq_InQueue(tpqueue, parentT);                 //将新树插入队列 
+		tree1 = tpq_OutQueue(tpqueue);
+		tree2 = tpq_OutQueue(tpqueue);
 	}
+	//bt_PrintPreOrder(tree1);
+	return tree1;
+	
+	//printf("%d",tree1->);
+	//*/
 }
 /*
 int bt_HuffCode(BiTree *biTree)			//哈夫曼编码

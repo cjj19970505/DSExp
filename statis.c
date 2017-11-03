@@ -94,6 +94,14 @@ int fll_GetData(FreLinkList *freLinkList, char *ch1, char *ch2, long *freq)
 	*freq = freLinkList->curr->num;
 	return 1;
 }
+int fll_SetHead(FreLinkList *freLinkList)
+{
+	if(freLinkList->head == NULL)
+	{
+		return 0;
+	}
+	freLinkList->curr = freLinkList->head;
+}
 //**************统计文档内容************************************************************ 
 void sta_statis(FreLinkList *freLinkList, CLinkList *fileContent)
 {

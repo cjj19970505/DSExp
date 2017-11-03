@@ -3,13 +3,13 @@
 #include "CLinkList.h"
 #include "statis.h"
 #include "TPQueue.h"
+#include "BiTree.h"
 void readSourceFile();
 void writeToFile(int dataLength,char* data);
 CLinkList fileContent;
 int max(int a, int b);
 int main(){
 	cll_Create(&fileContent);
-	
 	readSourceFile();
 	FreLinkList fll;
 	cll_SetHead(&fileContent);
@@ -20,8 +20,9 @@ int main(){
 	bt_Create(&t2,0,0,23);
 	bt_Create(&t3,0,0,2);
 	bt_Create(&t4,0,0,111);
+	fll_SetHead(&fll);
 	TPQueue tpqQueue;
-	
+	bt_CreHuff(&fll);
 	
 	
 	return 0;
@@ -35,7 +36,7 @@ int max(int a, int b)
 void readSourceFile(){
 	FILE *pFile;
 	int charCodes[100];
-	pFile=fopen("source.txt","r");
+	pFile=fopen("source3.txt","r");
 	if(pFile==NULL)
 	{
 		printf("File open failed");
