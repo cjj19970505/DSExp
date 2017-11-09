@@ -12,7 +12,7 @@ struct BiTree
 	struct BiTree *parent;
 };
 typedef struct BiTree BiTree;
-int bt_Create(BiTree *biTree, char c1, char c2, long freq); 
+BiTree *bt_Create(char c1, char c2, long freq);
 BiTree *bt_GetParent(BiTree *biTree);
 BiTree *bt_GetLeftTree(BiTree *biTree);
 BiTree *bt_GetRightTree(BiTree *biTree);
@@ -25,4 +25,5 @@ void bt_PreOrderRight(BiTree *biTree);
 void bt_PreOrderLeft(BiTree *biTree);
 int bt_SetParent( BiTree *target,BiTree *dad);
 BiTree *bt_CreHuff(FreLinkList *linkList);
+void bt_PrintPreOrder(BiTree *biTree);
 #endif

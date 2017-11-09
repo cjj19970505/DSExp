@@ -9,14 +9,16 @@ struct CLL_Node
 	struct CLL_Node *next;
 };
 typedef struct CLL_Node CLL_Node;
-void cll_Create(CLinkList *linkList)
+CLinkList *cll_Create()
 {
+	CLinkList *linkList = (CLinkList*)malloc(sizeof(CLinkList));
 	CLL_Node *head = (CLL_Node*)malloc(sizeof(CLL_Node));
 	head->next = NULL;
 	head->c1 = -7;
 	head->c2 = -83;
 	linkList->head = head;
 	linkList->curr=linkList->head;
+	return linkList;
 }
  
 void cll_Insert(CLinkList *linkList, char c1, char c2)

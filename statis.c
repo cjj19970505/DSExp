@@ -5,8 +5,20 @@
 //结构体定义 ,存字 
 
 //Create LinkList 
+/*
 void fll_Create(FreLinkList *linkList)
 {
+	FLL_Node *head = (FLL_Node*)malloc(sizeof(FLL_Node));
+	head->next = NULL;
+	head->c1 = 0;
+	head->c2 = 0;
+	head->num = 0;
+	linkList->head = head;
+	linkList->curr = linkList->head;
+}*/
+FreLinkList *fll_Create()
+{
+	FreLinkList *linkList = (FreLinkList*)malloc(sizeof(FreLinkList));
 	FLL_Node *head = (FLL_Node*)malloc(sizeof(FLL_Node));
 	head->next = NULL;
 	head->c1 = 0;
@@ -103,13 +115,14 @@ int fll_SetHead(FreLinkList *freLinkList)
 	freLinkList->curr = freLinkList->head;
 }
 //**************统计文档内容************************************************************ 
-void sta_statis(FreLinkList *freLinkList, CLinkList *fileContent)
+FreLinkList *sta_statis(CLinkList *fileContent)
 {
 	char ch1,ch2;
 	
 	cll_SetHead(fileContent);
-
-	fll_Create(freLinkList);
+	
+	FreLinkList *freLinkList = fll_Create();
+	
 	int endOfContent = 0; 
 	int singleCharFre[128] = {0};	//储存字符为0-127的值的频数 要做初始化，不然初值都不确定 
 	endOfContent = !cll_MoveNext(fileContent);
@@ -184,6 +197,7 @@ void sta_statis(FreLinkList *freLinkList, CLinkList *fileContent)
 		}
 	}
 	//fll_Print(freLinkList);
+	return freLinkList;
 }
 void fll_Sort(FreLinkList *freLinkList)
 {
@@ -214,6 +228,85 @@ void fll_Sort(FreLinkList *freLinkList)
 			}
 		}
 	}
+}
+void fll_PrintNode(FLL_Node *node)
+{
+	while(node!=NULL)
+	{
+		if(node->c1>=0){
+			printf("%c",node->c1);
+		}else{
+			putchar(node->c1);
+			putchar(node->c2);
+		}
+		printf("||??:%d",node->num);
+		printf("\n");
+		node=node->next;
+	}
+}
+//???????????
+void fll_SortquickHelp(FLL_Node *a,FLL_Node *b)
+{
+	if(a==b)
+	{
+		return;
+	}
+	if((a->next==b))
+	{
+		if((b->num)<(a->num))
+		{
+		fll_exangeContent(a,b);
+		return;
+		}
+		else return;
+	}
+	int key = a->num;
+	FLL_Node *p = a;
+	FLL_Node *q = a;
+	int i=1,j=1;
+	while(i)
+	{
+		q = q->next;
+		if((q->num)<key)
+		{
+			fll_exangeContent(p,q);
+			p = p->next;
+			j=0;
+		}
+		i=((p!=b)&&(q!=b));
+	}
+	FLL_Node *c;
+	if(j)
+	{
+		c = p->next;
+	}
+	else 
+	{
+		c = p;
+	}
+	fll_SortquickHelp(c,b);
+	fll_SortquickHelp(a,c);
+	return;	
+}
+
+
+void fll_Sortquick(FreLinkList *freLinkList)
+{
+	if(freLinkList->head==NULL)
+	{
+		return;
+	}
+	if(freLinkList->head->next==NULL)
+	{
+		return;
+	}
+	FLL_Node *head = freLinkList->head;
+	FLL_Node *tail = freLinkList->head->next;
+	while((tail->next)!=NULL)
+	{
+		tail=tail->next;
+	}
+	fll_SortquickHelp(head,tail);
 }
 
 

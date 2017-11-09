@@ -5,12 +5,12 @@
 #include <stdio.h>
 
 
-int bt_Create(BiTree *biTree, char c1, char c2, long freq)   // 创建一个二叉树 
+BiTree *bt_Create(char c1, char c2, long freq)   // 创建一个二叉树 
 {
-	//biTree = (BiTree*)malloc(sizeof(BiTree));		//申请空间 
+	BiTree *biTree = (BiTree*)malloc(sizeof(BiTree));	 
 	if (biTree == NULL)			//判断是否申请成功 
 	{
-		return 0;
+		return NULL;
 	}
 	biTree->leftTree = NULL;
 	biTree->rightTree = NULL;
@@ -18,7 +18,7 @@ int bt_Create(BiTree *biTree, char c1, char c2, long freq)   // 创建一个二叉树
 	biTree->c1 = c1;
 	biTree->c2 = c2;
 	biTree->freq = freq;
-	return 1;
+	return biTree;
 }
 
 BiTree *bt_GetParent(BiTree *biTree)     //返回当前节点的双亲节点 
@@ -154,8 +154,7 @@ BiTree *bt_CreHuff(FreLinkList *linkList)    //创建哈夫曼树
 	tree2 = tpq_OutQueue(tpqueue);
 	while (tree2 != NULL)
 	{
-		BiTree *parentT = (BiTree*)malloc(sizeof(BiTree));
-		bt_Create(parentT,128,0,tree1->freq + tree2->freq);
+		BiTree *parentT = bt_Create(128,0,tree1->freq + tree2->freq);
 		bt_SetLeft(parentT,tree1);
 		bt_SetRight(parentT,tree2);
 		tpq_InQueue(tpqueue, parentT);
@@ -168,16 +167,39 @@ BiTree *bt_CreHuff(FreLinkList *linkList)    //创建哈夫曼树
 	//printf("%d",tree1->);
 	//*/
 }
-/*
-int bt_HuffCode(BiTree *biTree)			//哈夫曼编码
+
+//删除
+//注意 该删除操作并不会删除其子树，但会 
+int bi_Delete(BiTree *biTree)
 {
 	if(biTree == NULL)
 	{
-		return NULL;
+		return 0;
 	}
-	bt_PreOrder(BiTree *biTree);
-	return 1;
-} */
+	if(biTree->parent != NULL)
+	{
+		BiTree *parent = biTree->parent;
+		if(parent->leftTree == biTree)
+		{
+			parent->leftTree = NULL;
+		}
+		if(parent->rightTree == biTree)
+		{
+			parent->rightTree = NULL;
+		}
+	}
+	if(biTree->leftTree != NULL)
+	{
+		biTree->leftTree->parent = NULL;
+	}
+	if(biTree->rightTree != NULL)
+	{
+		biTree->rightTree->parent = NULL;
+	}
+	free(biTree);
+}
+
+
 
 
 

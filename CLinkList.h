@@ -9,7 +9,7 @@ struct CLinkList
 };
 typedef struct CLinkList CLinkList;
 //创建链表 
-void cll_Create(CLinkList *linkList);
+CLinkList *cll_Create();
 
 //在当前指针的后一位插入 
 void cll_Insert(CLinkList *linkList, char c1, char c2);

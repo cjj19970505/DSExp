@@ -6,23 +6,20 @@
 #include "BiTree.h"
 void readSourceFile();
 void writeToFile(int dataLength,char* data);
-CLinkList fileContent;
+CLinkList *fileContent;
 int max(int a, int b);
 int main(){
-	cll_Create(&fileContent);
+	fileContent = cll_Create();
 	readSourceFile();
-	FreLinkList fll;
-	cll_SetHead(&fileContent);
-	sta_statis(&fll,&fileContent);
-	fll_Print(&fll);
-	BiTree t1,t2,t3,t4;
-	bt_Create(&t1,0,0,45);
-	bt_Create(&t2,0,0,23);
-	bt_Create(&t3,0,0,2);
-	bt_Create(&t4,0,0,111);
-	fll_SetHead(&fll);
+	
+	cll_SetHead(fileContent);
+	FreLinkList *fll = sta_statis(fileContent);
+	fll_Sortquick(fll);
+	fll_Print(fll);
+	fll_SetHead(fll);
 	TPQueue tpqQueue;
-	bt_CreHuff(&fll);
+	BiTree *tree = bt_CreHuff(fll);
+	bt_PrintPreOrder(tree);
 	return 0;
 }
 int max(int a, int b)
@@ -48,7 +45,7 @@ void readSourceFile(){
 	{
 		if(isChinese)
 		{
-			cll_Insert(&fileContent, preCh, ch);
+			cll_Insert(fileContent, preCh, ch);
 			isChinese = 0;
 		}
 		else
@@ -60,15 +57,15 @@ void readSourceFile(){
 			}
 			else
 			{
-				cll_Insert(&fileContent, ch, 0);
+				cll_Insert(fileContent, ch, 0);
 			}
 		}
-		cll_MoveNext(&fileContent);
+		cll_MoveNext(fileContent);
 		ch=fgetc(pFile);
 		count++;
 	}
 	int *code;
-	getHuffCode(fileContent, code);
+	//getHuffCode(fileContent, code);
 	
 	fclose(pFile);
 }

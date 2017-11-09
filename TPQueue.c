@@ -123,8 +123,8 @@ TPQueue *tpq_CreateFromFLL(FreLinkList *freLinkList)
 		char ch1,ch2;
 		long freq;
 		fll_GetData(freLinkList, &ch1, &ch2, &freq);
-		BiTree *newTree = (BiTree*)malloc(sizeof(BiTree));
-		bt_Create(newTree,ch1,ch2,freq);
+		BiTree *newTree = bt_Create(ch1,ch2,freq);
+		
 		tpq_InQueue(tpqueue, newTree);
 	}
 	return tpqueue;
