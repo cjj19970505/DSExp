@@ -22,10 +22,19 @@ int main(){
 	BiTree *tree = bt_CreHuff(fll);
 	bt_PrintPreOrder(tree);
 	printf("\n=========================\n");
-	Bit *bit = bit_CreateBit(0);
-	//printf("%d",bit_Length(bit));
 	
-	bit_Print(bit);
+	//printf("%d",bit_Length(bit));
+	//SAMPLE
+	
+	Bit *binaryData = bit_CreateBit();
+	//bit_AppendFromString(binaryData,"10001011",8);
+	printf("\n****\n");
+	bit_AppendFromString(binaryData,"0010001101001100000001",22);//EBPXA
+	
+	bit_Print(binaryData);
+	printf("\n****\n");
+	uncomp(tree,binaryData);
+	
 	return 0;
 }
 void readSourceFile(){
