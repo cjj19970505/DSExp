@@ -13,3 +13,7 @@ void bit_Input(Bit *bit, int num, int seat);
 
 //往末尾添加一个二进制位 
 void bit_Append(Bit *bit, int value);
+
+long bit_Length(Bit *bit);
+int bit_Get(Bit *bit, long pos);
+void bit_Print(Bit *bit);

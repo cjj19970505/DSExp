@@ -4,6 +4,7 @@
 #include "statis.h"
 #include "TPQueue.h"
 #include "BiTree.h"
+#include "bit.h"
 void readSourceFile();
 void writeToFile(int dataLength,char* data);
 CLinkList *fileContent;
@@ -20,13 +21,12 @@ int main(){
 	TPQueue tpqQueue;
 	BiTree *tree = bt_CreHuff(fll);
 	bt_PrintPreOrder(tree);
+	printf("\n=========================\n");
+	Bit *bit = bit_CreateBit(0);
+	//printf("%d",bit_Length(bit));
+	
+	bit_Print(bit);
 	return 0;
-}
-int max(int a, int b)
-{
-	return a>b?a:b;
-	//==============
-	//==============
 }
 void readSourceFile(){
 	FILE *pFile;

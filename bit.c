@@ -90,8 +90,52 @@ void bit_DeleteString(Bit *bit)
 {
 	free(bit->string);
 }
+long bit_Length(Bit *bit)
+{
+	return bit->length * sizeof(char) * 8 - bit->invalid;
+}
+int bit_Get(Bit *bit, long pos)
+{
+	//printf("\n=============BIT_GET=======================\n");
+	int charPos = pos / (sizeof(char)*8);	//这个位置是在第几个char上
+	//printf("charPos: %d\n",charPos);
+	int invalid = (sizeof(char)*8)-((pos+1) % (sizeof(char)*8));
+	//printf("invalid: %d\n",invalid);
+	char b = bit->string[charPos] & (1 << invalid);
+	//printf("\n=============BIT_GET=======================\n");
+	if(b == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
+}
+void bit_Print(Bit *bit)
+{
+	long n = bit_Length(bit);
+	for(int i = 0; i < n; i++)
+	{
+		printf("%d",bit_Get(bit,i));
+	}
+}
+//比较函数
 
-
+void binary(char data)
+{
+    for(int i=0;i<sizeof(data)*8;i++)
+    {
+        if((data & (1 << (sizeof(data)*8-1-i)))!= 0)
+    	{
+            printf("1");
+    	}
+        else
+    	{
+            printf("0");
+    	}
+    }
+}
 
 
 
