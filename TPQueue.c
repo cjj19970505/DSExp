@@ -80,6 +80,7 @@ int tpq_GetSize(TPQueue *queue)
 		count++;
 		node = node->next;
 	}
+	return count;
 }
 BiTree *tpq_OutQueue(TPQueue *queue)
 {
