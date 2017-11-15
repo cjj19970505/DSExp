@@ -1,6 +1,7 @@
 #ifndef STATIS_H
 #define STATIS_H
 #include "CLinkList.h"
+#include "bit.h"
 struct FLL_Node	//²»ÒªÓÃ£¡£¡ 
 {
 	char c1;
@@ -13,6 +14,13 @@ struct FreLinkList
 {
 	FLL_Node *head;
 	FLL_Node *curr;
+};
+struct CharInfo
+{
+	char c1;
+	char c2;
+	long count;
+	Bit *huffCode;	
 };
 typedef struct FreLinkList FreLinkList;
 FreLinkList *fll_Create();
