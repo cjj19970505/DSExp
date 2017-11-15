@@ -35,6 +35,7 @@ FreLinkList *fll_Create()
 	node->c2 = c2;
 	node->num = count; 
 	node->next = linkList->curr->next;
+	node->huffCode = NULL;
 	linkList->curr->next = node;
 }
 //指针移到下一个结点 
@@ -255,8 +256,8 @@ void fll_SortquickHelp(FLL_Node *a,FLL_Node *b)
 	{
 		if((b->num)<(a->num))
 		{
-		fll_exangeContent(a,b);
-		return;
+			fll_exangeContent(a,b);
+			return;
 		}
 		else return;
 	}
@@ -308,5 +309,5 @@ void fll_Sortquick(FreLinkList *freLinkList)
 	}
 	fll_SortquickHelp(head,tail);
 }
-
+//1 给字母设置huff值
 

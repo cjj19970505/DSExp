@@ -17,6 +17,7 @@ int main(){
 	FreLinkList *fll = sta_statis(fileContent);
 	fll_Sortquick(fll);
 	fll_Print(fll);
+	/*
 	fll_SetHead(fll);
 	TPQueue tpqQueue;
 	BiTree *tree = bt_CreHuff(fll);
@@ -33,7 +34,7 @@ int main(){
 	
 	bit_Print(binaryData);
 	printf("\n****\n");
-	uncomp(tree,binaryData);
+	uncomp(tree,binaryData);*/
 	
 	return 0;
 }

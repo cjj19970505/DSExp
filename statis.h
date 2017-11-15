@@ -7,6 +7,7 @@ struct FLL_Node	//²»ÒªÓÃ£¡£¡
 	char c1;
 	char c2;
 	int num;
+	Bit *huffCode;
 	struct FLL_Node *next;
 };
 typedef struct FLL_Node FLL_Node;
@@ -14,13 +15,6 @@ struct FreLinkList
 {
 	FLL_Node *head;
 	FLL_Node *curr;
-};
-struct CharInfo
-{
-	char c1;
-	char c2;
-	long count;
-	Bit *huffCode;	
 };
 typedef struct FreLinkList FreLinkList;
 FreLinkList *fll_Create();
