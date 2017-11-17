@@ -5,19 +5,23 @@
 #include "TPQueue.h"
 #include "BiTree.h"
 #include "bit.h"
+#include "DSFile.h"
+#include "uncomp.h"
+
 void readSourceFile();
 void writeToFile(int dataLength,char* data);
 CLinkList *fileContent;
 int max(int a, int b);
-int main(){
-	fileContent = cll_Create();
-	readSourceFile();
-	
+int main()
+{
+
+	fileContent = openTextFile("source3.txt");
+	printf("%d",fileContent);
 	cll_SetHead(fileContent);
 	FreLinkList *fll = sta_statis(fileContent);
 	fll_Sortquick(fll);
 	fll_Print(fll);
-	/*
+	
 	fll_SetHead(fll);
 	TPQueue tpqQueue;
 	BiTree *tree = bt_CreHuff(fll);
@@ -29,56 +33,22 @@ int main(){
 	
 	Bit *binaryData = bit_CreateBit();
 	//bit_AppendFromString(binaryData,"10001011",8);
-	printf("\n****\n");
-	bit_AppendFromString(binaryData,"0010001101001100000001",22);//EBPXA
-	
+	printf("\nThis is what you trying to write into out.dat\n");
+	bit_AppendFromString(binaryData,"011000010100110000000111111111111111010101010101100000000000000000111111111111111111111110000101101011111111");//EBPXA
+	printf("\n");
+	//uncomp(tree,binaryData);
 	bit_Print(binaryData);
-	printf("\n****\n");
-	uncomp(tree,binaryData);*/
+	printf("\n");
+	
+	writeBinaryFile("out.dat", binaryData);
+	printf("\nNow, let's read our fucking file\n");
+	Bit *readBin = readBinaryFile("out.dat");
+	printf("\n");
+	bit_Print(readBin);
 	
 	return 0;
 }
-void readSourceFile(){
-	FILE *pFile;
-	int charCodes[100];
-	pFile=fopen("source3.txt","r");
-	if(pFile==NULL)
-	{
-		printf("File open failed");
-		exit(1);
-	}
-	char ch = fgetc(pFile);
-	char preCh = ch;
-	int isChinese = 0;
-	int count = 0;
-	while(ch != EOF)
-	{
-		if(isChinese)
-		{
-			cll_Insert(fileContent, preCh, ch);
-			isChinese = 0;
-		}
-		else
-		{
-			if(ch < 0)
-			{
-				preCh = ch;
-				isChinese = 1;
-			}
-			else
-			{
-				cll_Insert(fileContent, ch, 0);
-			}
-		}
-		cll_MoveNext(fileContent);
-		ch=fgetc(pFile);
-		count++;
-	}
-	int *code;
-	//getHuffCode(fileContent, code);
-	
-	fclose(pFile);
-}
+
 void writeToFile(int dataLength,char* data)
 {
 	FILE *pFile;

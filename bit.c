@@ -3,31 +3,6 @@
 #include "bit.h"
 
 void bit_DeleteString(Bit *bit);
-/*
-Bit *bit_CreateBit(int value)
-{
-	Bit *bit = (Bit*)malloc(sizeof(Bit));
-	if (bit == NULL)
-	{
-		return NULL;
-	}
-	char initValue = 0;
-	bit->string = (char*)malloc(sizeof(char));
-	
-	if(value == 1)
-	{
-		initValue = initValue|(1<<(sizeof(char)*8-1));
-	}
-	else
-	{
-		initValue = initValue&(~(1<<(sizeof(char)*8-1)));
-	}
-	(bit->string)[0] = initValue;
-	//printf("%d", (bit->string)[0]);
-	bit->invalid = 8*sizeof(char)-1;
-	bit->length = 1;
-	return bit;
-}*/
 Bit *bit_CreateBit()
 {
 	Bit *bit = (Bit*)malloc(sizeof(Bit));
@@ -100,7 +75,7 @@ void bit_Append(Bit *bit, int value)
 		
 		if(newString == NULL)
 		{
-			printf("FCUIKSJDLFKJSDF");
+			printf("Shit happened!");
 		}
 		for(int i = 0; i < newLength; i++)
 		{
@@ -140,6 +115,7 @@ int bit_Get(Bit *bit, long pos)
 {
 	int charPos = pos / (sizeof(char)*8);	//这个位置是在第几个char上
 	int invalid = (sizeof(char)*8)-((pos+1) % (sizeof(char)*8));
+	invalid %= 8;
 	char b = bit->string[charPos] & (1 << invalid);
 	if(b == 0)
 	{
@@ -158,19 +134,27 @@ void bit_Print(Bit *bit)
 		printf("%d",bit_Get(bit,i));
 	}
 }
-void bit_AppendFromString(Bit *bit, char *data, int n)
+void bit_AppendFromString(Bit *bit, char *data)
 {
-	
-	for(int i=0; i < n; i++)
+	for(int i = 0; data[i] != '\0'; i++)
 	{
-		//printf("%d ",data[i]);
 		int b = 0;
-		if(data[i]==49)
+		if(data[i] == '1')
 		{
 			b = 1;
+			bit_Append(bit,b);
 		}
-		bit_Append(bit,b);
+		else if(data[i] == '0')
+		{
+			b = 0;
+			bit_Append(bit,b);
+		}
+		
 	}
+}
+int bit_GetUnitSize()
+{
+	return sizeof(char);
 }
 
 

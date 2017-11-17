@@ -19,6 +19,7 @@ void bit_Append(Bit *bit, int value);
 long bit_Length(Bit *bit);
 int bit_Get(Bit *bit, long pos);
 void bit_Print(Bit *bit);
-void bit_AppendFromString(Bit *bit, char *data, int n);
+void bit_AppendFromString(Bit *bit, char *data);
 void bit_Pop(Bit *bit);
+int bit_GetUnitSize();
 #endif
