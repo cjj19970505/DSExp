@@ -22,4 +22,5 @@ void bit_Print(Bit *bit);
 void bit_AppendFromString(Bit *bit, char *data);
 void bit_Pop(Bit *bit);
 int bit_GetUnitSize();
+Bit *bit_CopyFrom(Bit *binFrom);
 #endif

@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "CLinkList.h"
+
 //Create LinkList 
 struct CLL_Node
 {
@@ -86,4 +87,7 @@ void cll_SetHead(CLinkList *linkList)
 {
 	linkList->curr = linkList->head;
 }
+
+
+
 

@@ -26,4 +26,6 @@ int fll_GetData(FreLinkList *freLinkList, char *ch1, char *ch2, long *freq);
 int fll_MoveNext(FreLinkList *linkList);
 int fll_SetHead(FreLinkList *freLinkList);
 void fll_Sortquick(FreLinkList *freLinkList);
+void fll_SetHuffCode(FreLinkList *freLinkList, char c1, char c2, Bit *bit);
+Bit *fll_GetHuffCode(FreLinkList *freLinkList, char c1, char c2);
 #endif

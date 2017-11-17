@@ -26,4 +26,6 @@ void bt_PreOrderLeft(BiTree *biTree);
 int bt_SetParent( BiTree *target,BiTree *dad);
 BiTree *bt_CreHuff(FreLinkList *linkList);
 void bt_PrintPreOrder(BiTree *biTree);
+void bt_HuffCode(BiTree *huffTree,FreLinkList *frelinklist);
+int bt_LeaveCount(BiTree *tree);
 #endif

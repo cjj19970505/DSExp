@@ -3,7 +3,6 @@
 #include "DSFile.h"
 
 
-//返回值指定状态 
 CLinkList *openTextFile(char *fileName)
 {
 	FILE *pFile;
@@ -93,8 +92,23 @@ Bit *readBinaryFile(char *fileName)
 	fclose(fp);
 	//============================
 	return binary;
-	
-	
+}
+Bit *cll_ToBin(CLinkList *content, FreLinkList *freLinkList)
+{
+	if(content == NULL || freLinkList == NULL)
+	{
+		return NULL;
+	}
+	Bit *bin = bit_CreateBit();
+	cll_SetHead(content);
+	while(cll_MoveNext(content))
+	{
+		char c1,c2;
+		cll_GetData(content, &c1, &c2);
+		Bit* huffCode = fll_GetHuffCode(freLinkList,c1,c2);
+		
+		
+	}
 }
 
 

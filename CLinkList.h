@@ -1,5 +1,6 @@
 #ifndef CLINKLIST_H
 #define CLINKLIST_H
+#include "bit.h"
 struct CLL_Node;
 typedef struct CLL_Node LL_Node;
 struct CLinkList

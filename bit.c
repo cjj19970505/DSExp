@@ -15,10 +15,25 @@ Bit *bit_CreateBit()
 	bit->length = 0;
 	return bit;
 }
+Bit *bit_CopyFrom(Bit *binFrom)
+{
+	Bit *newBin = (Bit*)malloc(sizeof(Bit));
+	newBin->string = (char*)malloc(binFrom->length*sizeof(char));
+	for(int i=0; i < binFrom->length; i++)
+	{
+		newBin->string[i] = binFrom->string[i];
+	}
+	newBin->length = binFrom->length;
+	newBin->invalid = binFrom->invalid;
+}
 void bit_Pop(Bit *bit)
 {
-	if(bit->invalid == sizeof(char)-1)
+	if(bit->length == 1 && bit->invalid == 8)
 	{
+		printf("SHIT HAPPEN");
+	}
+	if(bit->invalid == sizeof(char)*8-1)
+	{	
 		char *newString = NULL;
 		int newLength = bit->length - 1;
 		newString = (char*)calloc(newLength,sizeof(char));

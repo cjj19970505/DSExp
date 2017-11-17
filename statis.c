@@ -60,6 +60,12 @@ void fll_Print(FreLinkList *linkList)
 			putchar(node->c2);
 		}
 		printf("||频数：%d",node->num);
+		if(node->huffCode != NULL)
+		{
+			printf("||二进制：");
+			bit_Print(node->huffCode);
+		}
+		
 		printf("\n");
 		node=node->next;
 	}
@@ -309,5 +315,57 @@ void fll_Sortquick(FreLinkList *freLinkList)
 	}
 	fll_SortquickHelp(head,tail);
 }
-//1 给字母设置huff值
+
+void fll_SetHuffCode(FreLinkList *freLinkList, char c1, char c2, Bit *bit)
+{
+	fll_SetHead(freLinkList);
+	while(fll_MoveNext(freLinkList))
+	{
+		char ch1, ch2;
+		long freq;
+		fll_GetData(freLinkList, &ch1, &ch2, &freq);
+		if(c1 > 0)
+		{
+			if(c1 == ch1)
+			{
+				freLinkList->curr->huffCode = bit;
+				break;
+			}
+		}
+		else
+		{
+			if(c1 == ch1 && c2 == ch2)
+			{
+				freLinkList->curr->huffCode = bit;
+				break;
+			}
+		}
+	
+	}
+}
+Bit *fll_GetHuffCode(FreLinkList *freLinkList, char c1, char c2)
+{
+	fll_SetHead(freLinkList);
+	while(fll_MoveNext(freLinkList))
+	{
+		char ch1, ch2;
+		long freq;
+		fll_GetData(freLinkList, &ch1, &ch2, &freq);
+		if(c1 > 0)
+		{
+			if(c1 == ch1)
+			{
+				return freLinkList->curr->huffCode;
+			}
+		}
+		else
+		{
+			if(c1 == ch1 && c2 == ch2)
+			{
+				return freLinkList->curr->huffCode;
+			}
+		}	
+	}
+	return NULL;
+}
 

@@ -199,6 +199,62 @@ int bi_Delete(BiTree *biTree)
 	free(biTree);
 }
 
+void bt_HuffCodeHelper(BiTree *huffTree, Bit *bit, FreLinkList *frelinklist)
+{
+	if(huffTree->leftTree != NULL)
+	{
+		bit_Append(bit, 0);
+		bt_HuffCodeHelper(huffTree->leftTree, bit, frelinklist);
+		bit_Pop(bit);
+	}
+	if(huffTree->rightTree != NULL)
+	{
+		bit_Append(bit, 1);
+		bt_HuffCodeHelper(huffTree->rightTree, bit, frelinklist);
+		bit_Pop(bit);
+	}
+	if(huffTree->leftTree == NULL && huffTree->rightTree == NULL)
+	{
+		if(huffTree->c1 > 0)
+		{
+			printf("%c ",huffTree->c1);
+		}
+		else
+		{
+			printf("%c%c ",huffTree->c1,huffTree->c2);
+		}
+		bit_Print(bit);
+		putchar('\n');
+		fll_SetHuffCode(frelinklist, huffTree->c1, huffTree->c2, bit_CopyFrom(bit));
+	}
+}
+void bt_HuffCode(BiTree *huffTree,FreLinkList *frelinklist)
+{
+	Bit *bit = bit_CreateBit();
+	bt_HuffCodeHelper(huffTree, bit, frelinklist);
+}
+
+int bt_LeaveCount(BiTree *tree)
+{
+	int total = 0;
+	if(tree->leftTree == NULL && tree->rightTree == NULL)
+	{
+		total += 1;
+	}
+	else
+	{
+		if(tree->leftTree != NULL)
+		{
+			total += bt_LeaveCount(tree->leftTree);
+		}
+		if(tree->rightTree != NULL)
+		{
+			total += bt_LeaveCount(tree->rightTree);
+		}
+	}
+	return total;
+}
+
 
 
 
