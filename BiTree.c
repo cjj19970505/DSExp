@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 BiTree *bt_Create(char c1, char c2, long freq)   // 创建一个二叉树 
 {
 	BiTree *biTree = (BiTree*)malloc(sizeof(BiTree));	 
@@ -215,16 +214,6 @@ void bt_HuffCodeHelper(BiTree *huffTree, Bit *bit, FreLinkList *frelinklist)
 	}
 	if(huffTree->leftTree == NULL && huffTree->rightTree == NULL)
 	{
-		if(huffTree->c1 > 0)
-		{
-			printf("%c ",huffTree->c1);
-		}
-		else
-		{
-			printf("%c%c ",huffTree->c1,huffTree->c2);
-		}
-		bit_Print(bit);
-		putchar('\n');
 		fll_SetHuffCode(frelinklist, huffTree->c1, huffTree->c2, bit_CopyFrom(bit));
 	}
 }

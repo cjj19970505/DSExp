@@ -1,8 +1,8 @@
-//得到密码树，密码；解压upcompress;相等返回1 
+//得到密码树，密码；解压upcompress;
 #include<stdio.h>
 #include "bit.h"
 #include "BiTree.h"
-void uncomp(BiTree *root,Bit *bit,int n)
+void uncomp(BiTree *root,Bit *bit)
 {
 	int i=2,j=0;
 	BiTree *curr;
@@ -42,6 +42,5 @@ void uncomp(BiTree *root,Bit *bit,int n)
 		}
 		curr = root;		
 	}
-	printf("\nJ: %d",j);
 	putchar('\n');
 }

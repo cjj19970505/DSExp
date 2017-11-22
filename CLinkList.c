@@ -40,7 +40,7 @@ int cll_MoveNext(CLinkList *linkList)
 }
 void cll_Print(CLinkList *linkList)
 {
-	CLL_Node *node=linkList->head;
+	CLL_Node *node=linkList->head->next;
 	while(node!=NULL)
 	{
 		if(node->c1>=0){
@@ -49,7 +49,7 @@ void cll_Print(CLinkList *linkList)
 			putchar(node->c1);
 			putchar(node->c2);
 		}
-		printf("-->");
+		//printf("-->");
 		node=node->next;
 	}
 }
@@ -83,6 +83,7 @@ int cll_GetIndex(CLinkList *linkList)
 		i++;
 	}
 }
+
 void cll_SetHead(CLinkList *linkList)
 {
 	linkList->curr = linkList->head;

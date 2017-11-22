@@ -25,6 +25,7 @@ Bit *bit_CopyFrom(Bit *binFrom)
 	}
 	newBin->length = binFrom->length;
 	newBin->invalid = binFrom->invalid;
+	return newBin;
 }
 void bit_Pop(Bit *bit)
 {
@@ -165,6 +166,13 @@ void bit_AppendFromString(Bit *bit, char *data)
 			bit_Append(bit,b);
 		}
 		
+	}
+}
+void bit_AppendFromBit(Bit *bit1, Bit *bit2)
+{
+	for(int i=0; i<bit_Length(bit2); i++)
+	{
+		bit_Append(bit1, bit_Get(bit2,i));
 	}
 }
 int bit_GetUnitSize()
